@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Energy Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>⚡ Smart Energy Dashboard</h1>
+
+<div class="cards">
+  <div class="card">
+    <h3>Total Energy</h3>
+    <p id="totalEnergy">0 kWh</p>
+  </div>
+
+  <div class="card">
+    <h3>Daily Cost</h3>
+    <p id="dailyCost">0 ALL</p>
+  </div>
+</div>
+
+<h2>📊 Energy by Device</h2>
+
+<form id="energyForm">
+  <input type="text" id="device" placeholder="Device name" required />
+  <input type="number" id="power" placeholder="Power (W)" required />
+  <input type="number" id="hours" placeholder="Hours / day" required />
+  <button type="submit">Add Device</button>
+</form>
+
+<canvas id="energyChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
