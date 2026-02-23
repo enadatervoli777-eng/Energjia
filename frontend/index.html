@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Energy Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+    <h1> Smart Energy Calculator</h1>
+    <p>Llogaritni konsumin dhe koston e energjisë elektrike në sekonda</p>
+    <a href="#calculator" class="hero-btn">Filloni llogaritjet</a>
+  </header>
+
+  <!-- CALCULATOR -->
+  <section id="calculator" class="calculator">
+    <h2>Energy Calculator</h2>
+
+    <div class="presets">
+  <p>Pajisje të përditshme:</p>
+  <div class="preset-buttons">
+    <button type="button" data-power="100" data-hours="5">💻 Laptop</button>
+    <button type="button" data-power="150" data-hours="4">📺 TV</button>
+    <button type="button" data-power="800" data-hours="1">🍳 Mikrovalë</button>
+    <button type="button" data-power="1500" data-hours="2">❄️ Ngrohës</button>
+  </div>
+</div>
+
+    <form id="energyForm">
+      <label>
+        Fuqia (Watts)
+        <input type="number" id="power" required placeholder="p.sh. 1000">
+      </label>
+
+      <label>
+        Orë në ditë
+        <input type="number" id="hours" required placeholder="p.sh. 5">
+      </label>
+
+      <label>
+        Çmimi për kWh (€)
+        <input type="number" step="0.01" id="price" required placeholder="p.sh 0.12">
+      </label>
+
+      <button type="submit" id="calcBtn">Llogarit</button>
+    </form>
+
+    <div id="result" class="result"></div>
+
+    <section class="history">
+  <h3> Historia </h3>
+  <ul id="historyList"></ul>
+  <button id="clearHistory">Pastro historinë</button>
+</section>
+
+    <canvas id="energyChart"></canvas>
+  </section>
+
+  <section class="about">
+  <h2>ℹ️ Si funksionon</h2>
+
+  <p>
+    Ky kalkulator llogarit konsumin e energjisë elektrike bazuar në
+    fuqinë e pajisjes, orët ditore të përdorimit dhe çmimin e energjisë.
+  </p>
+
+  <ul>
+    <li><strong>Energjia (kWh)</strong> = Fuqia (W) × Orët ÷ 1000</li>
+    <li><strong>Kostoja (€)</strong> = Energjia × Çmimi për kWh</li>
+    <li>Llogaritjet kryhen menjëherë në kohë reale</li>
+    <li>Të dhënat ruhen lokalisht për përvojë më të mirë</li>
+  </ul>
+</section>
+
+  <footer>
+    © 2026 – Smart Energy Project
+  </footer>
+
+  <!-- JAVASCRIPT -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/dashboard.js"></script>
+
+  <script>
+
+    const toggleBtn = document.getElementById("themeToggle");
+
+  console.log(toggleBtn); // 🧪 TEST
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+  });
+
+  const form = document.getElementById("energyForm");
+  const result = document.getElementById("result");
+  const button = document.getElementById("calcBtn");
+  const ctx = document.getElementById("energyChart").getContext("2d");
+
+  let chart;
+      
+
+  const presetButtons = document.querySelectorAll(".preset-buttons button");
+
+presetButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.getElementById("power").value = btn.dataset.power;
+    document.getElementById("hours").value = btn.dataset.hours;
+
+    document.getElementById("power").focus();
+  });
+});
+
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    button.innerText = "Calculating...";
+    button.disabled = true;
+
+    setTimeout(() => {
+      const power = Number(document.getElementById("power").value);
+      const hours = Number(document.getElementById("hours").value);
+      const price = Number(document.getElementById("price").value);
+
+      const energy = (power * hours) / 1000;
+      const cost = energy * price;
+
+      result.innerHTML = `
+        <h3>Results</h3>
+        <p> Energy used: <strong>${energy.toFixed(2)} kWh</strong></p>
+        <p> Cost: <strong>${cost.toFixed(2)} €</strong></p>
+      `;
+       
+      history.push({
+  energy: energy.toFixed(2),
+  cost: cost.toFixed(2)
+});
+
+const toggleBtn = document.getElementById("themeToggle");
+
+// load saved theme
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
+  toggleBtn.textContent = "☀️";
+}
+
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+
+  if (document.body.classList.contains("light")) {
+    localStorage.setItem("theme", "light");
+    toggleBtn.textContent = "☀️";
+  } else {
+    localStorage.setItem("theme", "dark");
+    toggleBtn.textContent = "🌙";
+  }
+});
+
+localStorage.setItem("energyHistory", JSON.stringify(history));
+renderHistory();
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Energy (kWh)", "Cost (€)"],
+          datasets: [{
+            data: [energy, cost],
+            backgroundColor: ["#00e5ff", "#ffca28"]
+          }]
+        },
+        options: {
+          responsive: true,
+          animation: {
+            duration: 1400,
+            easing: "easeOutQuart"
+          }
+        }
+      });
+
+      button.innerText = "Calculate";
+      button.disabled = false;
+    }, 600);
+  });
+
+  const historyList = document.getElementById("historyList");
+const clearHistoryBtn = document.getElementById("clearHistory");
+
+// Load history on page load
+let history = JSON.parse(localStorage.getItem("energyHistory")) || [];
+
+function renderHistory() {
+  historyList.innerHTML = "";
+
+  history.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.energy} kWh – €${item.cost}`;
+    historyList.appendChild(li);
+  });
+}
+
+renderHistory();
+
+// Clear history
+clearHistoryBtn.addEventListener("click", () => {
+  history = [];
+  localStorage.removeItem("energyHistory");
+  renderHistory();
+});
+
+</script>
+
+</body>
+</html>

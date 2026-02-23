@@ -1,0 +1,316 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b132b, #1c2541);
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+/* HERO */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  max-width: 520px;
+}
+
+.hero-btn {
+  margin-top: 30px;
+  padding: 14px 32px;
+  border-radius: 30px;
+  background: #00e5ff;
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,229,255,0.4);
+}
+
+/* CALCULATOR SECTION */
+.calculator {
+  max-width: 420px;
+  margin: -80px auto 60px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+}
+
+.calculator h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+}
+
+/* FORM */
+form label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+form input {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+
+form input:hover {
+  transform: translateY(-1px);
+  transition: 0.2s ease;
+}
+
+
+form input:focus {
+  outline: 2px solid #00e5ff;
+}
+
+/* BUTTON */
+form button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 5px;
+  border-radius: 12px;
+  border: none;
+  background: #00e5ff;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,229,255,0.4);
+}
+
+/* RESULT */
+.result {
+  margin-top: 22px;
+  padding: 15px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 14px;
+  animation: fadeUp 0.5s ease;
+}
+
+.result h3 {
+  margin-bottom: 8px;
+}
+
+/* CHART */
+canvas {
+  margin-top: 25px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  opacity: 0.6;
+  padding-bottom: 25px;
+  font-size: 0.85rem;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.presets {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.presets p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.preset-buttons button {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-buttons button:hover {
+  background: #00e5ff;
+  color: black;
+  transform: translateY(-2px);
+}
+
+.history {
+  margin-top: 30px;
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.history h3 {
+  margin-bottom: 10px;
+}
+
+#historyList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+#historyList li {
+  padding: 8px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+#clearHistory {
+  background: #ff5252;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#clearHistory:hover {
+  background: #ff1744;
+}
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  transition: background 0.3s, color 0.3s;
+}
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  transition: background 0.3s, color 0.3s;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+body.light {
+  background: white !important;
+  color: black !important;
+}
+
+body {
+  background: #0f2027;
+  color: white;
+}
+
+body.light {
+  background: #f5f5f5;
+  color: #111;
+}
+
+button#themeToggle.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  background: #222;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+button#themeToggle.theme-toggle:hover {
+  transform: scale(1.05);
+}
+
+.about {
+  margin-top: 60px;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.about h2 {
+  margin-bottom: 12px;
+}
+
+.about p {
+  opacity: 0.9;
+}
+
+.about ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+.about li {
+  margin-bottom: 8px;
+}
+
+body.dark .about {
+  background: #1e1e1e;
+}
